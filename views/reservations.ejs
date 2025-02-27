@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Reservations</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      table {
+        width: 80%;
+        color: white;
+        margin: 50px auto;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        
+        color: white;
+      }
+
+    </style>
+  </head>
+  <body style="background-image: linear-gradient(to left, #402cef,#b52de3);">
+    <h1 style="color: white;">Reservation Details</h1>
+    <table>
+      <tr>
+        <th>State</th>
+        <th>Room number</th>
+        <th>Room Cost</th>
+        <th>Total Service Cost</th>
+        <th>Total Cost</th>
+        <th>Check-in date</th>
+        <th>Check-out date</th>
+        <th>cancel the reservations</th>
+      </tr>
+      <tr>
+        <td>unassertive</td>
+        <td><%= RID %></td>
+        <td><%= roomCost %></td>
+        <td><%= servicecost %></td>
+        <td><%= total %></td>
+        <td><%= checkin %></td>
+        <td><%= checkout %></td>
+        <td><a href="/cancelres/<%= CID %>/<%= RID %>">cancel</a></td>
+      </tr>
+    </table>
+    <center><a style="color: white; font-size: larger;" href="/">relogin to stabilizing the data</a></center>
+    
+  </body>
+</html>

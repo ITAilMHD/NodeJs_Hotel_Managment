@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body style="background-image: linear-gradient(to left, #402cef,#b52de3);">
+    <%- include('partials/nav.ejs') %>
+    <div style="margin-top:55px; background-image: linear-gradient(to left, #402cef,#b52de3);">
+      <h2 style="color: white;">Add Hotel Manager</h2>
+      <form
+        method="post"
+        action="/addhotel"
+        name="register_form"
+        class="form-group"
+        style="margin:5%"
+      > 
+        <div class="input-group mb-3">
+          <label for="username" class="col-sm-2 col-form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            placeholder="Username"
+            aria-label="Username"
+            aria-describedby="basic-addon3"
+            id="username"
+            required
+          />
+        </div>
+        <div class="input-group mb-3">
+          <label for="password" class="col-sm-2 col-form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password1"
+            placeholder="Password"
+            aria-label="password"
+            aria-describedby="basic-addon10"
+            id="password1"
+            required
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <label for="password2" class="col-sm-2 col-form-label"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            name="password2"
+            placeholder="confirm password"
+            aria-label="password2"
+            aria-describedby="basic-addon11"
+            id="password2"
+            required
+          />
+        </div>
+        <div class="invalid-feedback">You must agree before submitting.</div>
+        <div class="input-group">
+          <button style="background-color:blueviolet; border: 0;" type="submit" class="btn btn-primary" style="width:200px">
+            Add Manager
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    var password = document.getElementById("password1"),
+      confirm_password = document.getElementById("password2");
+
+    function validatePassword() {
+      if (password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity("");
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+  </script>
+</html>

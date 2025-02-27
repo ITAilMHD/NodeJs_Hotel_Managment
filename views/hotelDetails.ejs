@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Customer Home</title>
+        <!-- Add any slider CSS libraries, for example, Swiper.js -->
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+        <!-- Add Font Awesome CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <style>
+            .swiper-container {
+                width: 100%;
+                height: 100%;
+            }
+            .swiper-slide {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .hotel-image {
+                width: 300px;
+                height: 300px;
+                cursor: pointer; /* Cursor changes to pointer on hover */
+            }
+            .hotel-name {
+                margin: 10px 0;
+                font-size: 24px;
+                font-weight: bold;
+                color: white;
+                text-transform: uppercase;
+                cursor: pointer; /* Cursor changes to pointer on hover */
+            }
+            .hotel-rate {
+                margin: 10px 0;
+                color: #f39c12; /* Gold color for stars */
+                font-size: 20px;
+            }
+            .star::before {
+                content: "★"; /* Unicode character for star */
+                color: #f39c12; /* Gold color */
+                margin-right: 2px;
+            }
+            .empty-star::before {
+                content: "☆"; /* Unicode character for empty star */
+                color: #f39c12; /* Gold color */
+                margin-right: 2px;
+            }
+            nav {
+                display: flex;
+                padding: 10px;
+                background-color: #2c3e50;
+                color: white;
+            }
+            nav a {
+                color: white;
+                text-decoration: none;
+                margin: 0 10px;
+            }
+            nav a:hover {
+                text-decoration: underline;
+            }
+            .search-bar {
+                display: flex;
+                justify-content: center;
+                padding: 10px;
+                background-color: #f8f9fa;
+            }
+            .search-bar input {
+                padding: 10px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 20px 0 0 20px; /* Add radius here */
+                margin-right: -1px; /* Overlap the border-radius of the button */
+            }
+            .search-bar input:hover {
+                border-color: #2c3e50;
+            }
+            .search-bar button {
+                padding: 10px 15px;
+                background-color: #2c3e50;
+                border: none;
+                border-radius: 0 20px 20px 0; /* Add radius here */
+                cursor: pointer;
+            }
+            .search-bar button:hover {
+                background-color: #1a252f;
+            }
+            .search-bar button i {
+                color: white;
+                font-size: 16px;
+            }
+            table { width: 100%; border-collapse: collapse; color: white; } 
+        th, td, tr { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; } 
+        </style>
+    </head>
+<body style="background-image: linear-gradient(to left, #402cef,#b52de3);">
+    <nav>
+        <a href="/reservations/<%= CID %>">Show My Reservations</a>
+        <a href="/">Logout</a>
+    </nav>
+    <% if(hotels.length > 0) { %>
+        <% hotels.forEach(function(hotel) { %>
+            <div style="background-image: linear-gradient(to left, #402cef,#b52de3);">
+                <center>
+                    <div style="display:contents; justify-content: center; align-items: center; flex-direction: column; height: 50vh;">
+                        <img class="hotel-image" src="/<%= hotel.image_url %>" alt="<%= hotel.HotelName %> Image">
+                        <div class="hotel-name" data-id="<%= hotel.ID %>"><%= hotel.HotelName %></div>
+                        <div class="hotel-name">Number of Rooms: <%= hotel.RoomNum %></div>
+                        <div class="hotel-name">Address: <%= hotel.address %></div>
+                        <div class="hotel-name">Phone: 0<%= hotel.phone %></div>
+                        <div class="hotel-rate" data-rating="<%= hotel.stars %>">Rating: <%= hotel.stars %> stars</div>
+                    </div>
+                </center>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Price</th>
+                            <th>Availability</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% rooms.forEach(function(room) { %>
+                            <% if(room.HID === hotel.UID) { %>
+                                <tr>
+                                    <td><%= room.RoomCost %></td>
+                                    <% if(room.RoomState == 'Available') {%>
+                                        <td>Available</td> 
+                                    <% } %>
+                                    <% if(room.RoomState != 'Available') {%>
+                                        <td>Not Available</td>
+                                    <% } %>
+                                    <td><a href="/roomdetails/<%= room.ID %>/<%= CID %>">Details</a></td>
+                                </tr>
+                            <% } %>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>No hotels available.</p>
+    <% } %>
+    <!-- Add Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Add Font Awesome for search icon -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const ratingElements = document.querySelectorAll('.hotel-rate');
+            
+            ratingElements.forEach(function(element) {
+                const rating = parseInt(element.getAttribute('data-rating'));
+                let stars = '';
+
+                for (let i = 0; i < 5; i++) {
+                    if (i < rating) {
+                        stars += '<span class="star"></span>';
+                    } else {
+                        stars += '<span class="empty-star"></span>';
+                    }
+                }
+
+                element.innerHTML = 'Rating: ' + stars;
+            });
+        });
+    </script>
+</body>
+</html>

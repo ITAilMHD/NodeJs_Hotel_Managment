@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>update profile</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"
+        />
+        <style>
+          label{
+            color: white;
+          }
+        </style>
+<body style="background-image: linear-gradient(to left, #402cef,#b52de3);">
+    <div style="margin-top:55px; background-image: linear-gradient(to left, #402cef,#b52de3);">
+        
+        <h1 style="color: white;">Update Profile or</h1>
+        <form action="/deleteprofile" method="get" onsubmit="return confirm('Are you sure you want to delete your profile?');">
+            <input type="hidden" name="UID" value="<%= UID %>">
+            <button style="background-color:blueviolet; border: 0; color: white; font-size: x-large;" type="submit">Delete Account</button>
+        </form>
+    <form action="/updateuserprofile" method="POST" style="margin:100px">
+        <input type="hidden" name="UID" value="<%= UID %>">
+        <div class="form-group row">
+            <label style="color: white;" class="col-sm-2 col-form-label" for="username">Username:</label>
+            <input class="form-control" type="text" id="username" name="username" value="<%= userdetails[0].uname %>" required>
+        </div>
+        <div class="form-group row">
+            <label style="color: white;" class="col-sm-2 col-form-label" for="password">password:</label>
+            <input class="form-control" type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group row">
+            <label style="color: white;" class="col-sm-2 col-form-label" for="firstname">First Name:</label>
+            <input class="form-control" type="text" id="firstname" name="firstname" value="<%= details[0].firstName %>" required>
+        </div>
+        <div class="form-group row">
+            <label style="color: white;" class="col-sm-2 col-form-label" for="lastname">Last Name:</label>
+            <input class="form-control" type="text" id="lastname" name="lastname" value="<%= details[0].lastName %>" required>
+        </div>
+        <div class="form-group row">
+            <label style="color: white;" class="col-sm-2 col-form-label" for="birthdate">Birthdate:</label>
+            <input class="form-control" type="text" id="birthdate" name="birthdate" value="<%= details[0].birthdate %>" required>
+        </div>
+        <div class="form-group row">
+            <label style="color: white;" class="col-sm-2 col-form-label" for="creditcardnumber">Credit Card Number:</label>
+            <input class="form-control" type="text" id="creditcardnumber" name="creditcardnumber" value="<%= details[0].CreditCard %>" required>
+        </div>
+        <div class="form-group row">
+            <label style="color: white;" class="col-sm-2 col-form-label" for="phone">Phone:</label>
+            <input class="form-control" type="text" id="phone" name="phone" value="<%= details[0].phone %>" required>
+        </div>
+        <div class="form-group row">
+            <label style="color: white;" class="col-sm-2 col-form-label" for="address">Address:</label>
+            <input class="form-control" type="text" id="address" name="address" value="<%= details[0].address %>" required>
+        </div>
+        <div class="form-group row">
+            <label style="color: white;" class="col-sm-2 col-form-label" for="email">Email:</label>
+            <input class="form-control" class="form-control" type="email" id="email" name="email" value="<%= details[0].email %>" required>
+        </div>
+        <div class="form-group row">
+            <button style="background-color:blueviolet; border: 0; width: 300px;color: white; font-size: x-large;" type="submit">Update</button>
+        </div>
+    </form>
+    
+    </div>
+</body>
+</html>

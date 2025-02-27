@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <style>
+        table { width: 100%; border-collapse: collapse; } 
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; } 
+    </style>
+  </head>
+  <body style="background-image: linear-gradient(to left, #402cef,#b52de3);">
+    <%- include('partials/nav.ejs') %>
+    <div style="margin-top:55px; background-image: linear-gradient(to left, #402cef,#b52de3);">
+      <h2 style="color: white;">Add Room</h2>
+      <form
+        method="post"
+        action="/addrooms"
+        name="addrooms_form"
+        class="form-group"
+        style="margin:5%"
+        enctype="multipart/form-data"
+      >
+        <div class="input-group mb-3">
+          <label for="rstate" class="col-sm-2 col-form-label">Room State</label>
+          <input
+            type="text"
+            name="rstate"
+            class="form-control"
+            placeholder="Room State"
+            aria-label="rstate"
+            aria-describedby="basic-addon1"
+            id="rstate"
+            required
+          />
+        </div>
+        <div class="input-group mb-3">
+          <label for="rcost" class="col-sm-2 col-form-label">Room Cost</label>
+          <input
+            type="text"
+            name="rcost"
+            class="form-control"
+            placeholder="Room Cost"
+            aria-label="Room Cost"
+            aria-describedby="basic-addon1"
+            id="rcost"
+            required
+          />
+        </div>
+
+        <div class="input-group mb-3">
+            <label for="file" class="col-sm-2 col-form-label">Room Images</label>
+            <input
+              type="file"
+              name="file"
+              class="form-control"
+              aria-label="Room Images"
+              aria-describedby="basic-addon1"
+              id="file"
+              accept=".jpg,.jpeg,.png"
+              multiple
+              required
+            />
+          </div>
+        
+        <div class="input-group mb-3">
+          <label for="dropdown" class="col-sm-2 col-form-label">Select Room Type</label>
+          <select name="dropdown" id="dropdown" class="form-control">
+            <option value="">Select an option</option>
+            <% options.forEach(options => { %>
+              <option value="<%= options.ID %>"><%= options.TypeName %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="input-group mb-3">
+          <label for="servicetable" class="col-sm-2 col-form-label">service table</label>
+          <table id="servicetable">
+            <thead>
+              <tr>
+                <th>Select</th>
+                <th>ID</th>
+                <th>Service Name</th>
+                <th>Service Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% services.forEach(item => { %>
+              <tr>
+                <td>
+                  <input type="checkbox" name="rawSelectedIds[]" value="<%= item.ID %>">
+                </td>
+                <td><%= item.id %></td>
+                <td><%= item.ServiceName %></td>
+                <td><%= item.ServiceCost %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <div class="input-group mb-3">
+            <input
+              type="hidden"
+              name="UID"
+              class="form-control"
+              aria-describedby="basic-addon1"
+              id="UID"
+              value="<%= UID %>"
+              required
+            />
+          </div>
+        <div class="input-group">
+          <button type="submit" class="btn btn-primary" style="background-color:blueviolet; border: 0; width:200px;">
+            Add Room
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

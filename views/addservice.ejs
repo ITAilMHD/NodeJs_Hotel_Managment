@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <style>
+      label{
+        color: white;
+      }
+    </style>
+  </head>
+  <body style="background-image: linear-gradient(to left, #402cef,#b52de3);">
+    <%- include('partials/nav.ejs') %>
+    <div style="margin-top:55px; background-image: linear-gradient(to left, #402cef,#b52de3);">
+      <h2 style="color: white;">Add Hotel Service</h2>
+      <form
+        method="post"
+        action="/addservice"
+        name="register_form"
+        class="form-group"
+        style="margin:5%"
+      > 
+        <div class="input-group mb-3">
+          <label for="servicename" class="col-sm-2 col-form-label">Service Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="servicename"
+            placeholder="Service Name"
+            aria-label="Service Name"
+            aria-describedby="basic-addon3"
+            id="servicename"
+            required
+          />
+        </div>
+        <div class="input-group mb-3">
+          <label for="servicecost" class="col-sm-2 col-form-label">Service Cost</label>
+          <input
+            type="number"
+            class="form-control"
+            name="servicecost"
+            placeholder="Service Cost"
+            aria-label="Service Cost"
+            aria-describedby="basic-addon10"
+            id="servicecost"
+            required
+          />
+          <input type="hidden" name="UID" value="<%= UID %>" />
+        </div>
+
+        
+        <div class="invalid-feedback">You must agree before submitting.</div>
+        <div class="input-group">
+          <button style="background-color:blueviolet; border: 0; width:200px;" type="submit" class="btn btn-primary">
+            Add Service
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

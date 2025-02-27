@@ -1,0 +1,45 @@
+nav {
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Image Slider Styles */
+#slider {
+    max-width: 100%;
+    height: auto;
+}
+
+#slider img {
+    width: 100%;
+    height: auto;
+}
+
+/* Hotel Definition Section Styles */
+#hotel-definition {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
